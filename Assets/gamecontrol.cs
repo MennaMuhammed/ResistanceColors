@@ -13,15 +13,14 @@ public class gamecontrol : MonoBehaviour
 
     private float randGoal;
     private int score_num=0;
-    private int i = 0;
+    float[] factors = new float[] {10f, 100f, 1000f, 10000f, 100000f, 1000000f,10000000f,100000000f, 1f, 0.1f, 0.001f};
 
-    float[] goals = new float[] { 10f, 100f, 1000f, 1200f, 2500f, 6000f, 70000f, 88000f, 900f, 6500f, 700f, 220f, 770f };
     // Start is called before the first frame update
     void Start()
     {
         updategoal();
         //InvokeRepeating("updategoal",15,15);
-        //InvokeRepeating("checkScore",0.2f,0.2f);
+        InvokeRepeating("checkScore",1f,1f);
         
     }
 
@@ -29,18 +28,15 @@ public class gamecontrol : MonoBehaviour
     void Update()
     {
         value.text= resistance.value.ToString();
-        checkScore(); 
+        //checkScore(); 
     }
 
     void updategoal()
     {
-        //System.Random random = new System.Random();
-        int r = UnityEngine.Random.Range(0, goals.Length);
-        //randGoal = random.Next(1, 1000) * 10;
-        //randGoal = goals[i];
-        randGoal = goals[r];
+
+        int r = UnityEngine.Random.Range(0, factors.Length);
+        randGoal = UnityEngine.Random.Range(1,20) * factors[r];
         goal.text= randGoal.ToString();
-        //i++;
         
     }
 
@@ -53,6 +49,7 @@ public class gamecontrol : MonoBehaviour
             updategoal();
             resistance.Restart();
             value.text="0";
+            
         }
     }
 
