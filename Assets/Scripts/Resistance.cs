@@ -6,7 +6,7 @@ public class Resistance : MonoBehaviour
 {
     public BandColor[] Bands;
 
-    public static float value = 0f;
+    public float value = 0f;
     
     private void Update()
     {
