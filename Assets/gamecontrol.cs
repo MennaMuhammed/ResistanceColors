@@ -16,10 +16,10 @@ public class gamecontrol : MonoBehaviour
     private int score_num=0;
     float[] factors = new float[] {10f, 100f, 1000f, 10000f, 100000f, 1000000f,10000000f,100000000f, 1f, 0.1f, 0.01f};
 
-    //timer
-    private float timer_val = 120; //2 minutes
-    private bool canCount=true;
-    private bool doOnce=false;
+    //timer -> reset timer to initialize
+    private float timer_val;
+    private bool canCount;
+    private bool doOnce;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +53,11 @@ public class gamecontrol : MonoBehaviour
     {
         if (resistance.value == randGoal)
         {
-            score_num++;
+            if(timer_val>40) score_num+=3; // add 3 points in first 20 seconds
+            else if(timer_val>20) score_num+=2; // add 2 points in second 20 seconds
+            else score_num++; // add 1 point in the remaining seconds
+
+            // edit score
             score.text= score_num.ToString();
             updategoal();
             resistance.Restart();
@@ -88,7 +92,7 @@ public class gamecontrol : MonoBehaviour
 
     void reset_timer()
     {
-        timer_val=120;
+        timer_val=60; //1 minute
         canCount=true;
         doOnce=false;
     }
