@@ -27,7 +27,7 @@ public class BandColor : MonoBehaviour
         band = GetComponent<Renderer>().materials[0];
         if (Tolerance)
         {
-            band.color = BandColors[tolerancePoss[Random.Range(0, tolerancePoss.Length)]];
+            band.color = BandColors[tolerancePoss[UnityEngine.Random.Range(0, tolerancePoss.Length)]];
         }
         else
         {
@@ -47,7 +47,7 @@ public class BandColor : MonoBehaviour
     {
         if (Tolerance)
         {
-            band.color = BandColors[tolerancePoss[Random.Range(0, tolerancePoss.Length)]];
+            band.color = BandColors[tolerancePoss[UnityEngine.Random.Range(0, tolerancePoss.Length)]];
         }
         else
         {

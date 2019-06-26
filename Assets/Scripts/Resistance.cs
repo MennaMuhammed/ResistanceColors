@@ -10,7 +10,7 @@ public class Resistance : MonoBehaviour
     
     private void Update()
     {
-        int multi = Bands[2].CurrentColor >= 9 ? 9-Bands[2].CurrentColor : Bands[2].CurrentColor;
+        int multi = Bands[2].CurrentColor > 9 ? 9-Bands[2].CurrentColor : Bands[2].CurrentColor;
         value = ((Bands[0].CurrentColor * 10) + Bands[1].CurrentColor) * (Mathf.Pow(10,multi));
     }
     public void Restart()
