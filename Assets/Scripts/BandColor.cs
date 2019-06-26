@@ -71,6 +71,7 @@ public class BandColor : MonoBehaviour
         {
             CurrentColor = (CurrentColor + 1) % range;
             band.color = BandColors[CurrentColor];
+            GetComponent<AudioSource>().Play();
         }
     }
     private void OnMouseOver()
@@ -81,6 +82,8 @@ public class BandColor : MonoBehaviour
             {
                 CurrentColor = (range + (CurrentColor - 1)) % range;
                 band.color = BandColors[CurrentColor];
+                GetComponent<AudioSource>().Play();
+
             }
         }
     }
