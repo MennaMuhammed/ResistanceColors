@@ -44,10 +44,9 @@ public class ParticleControl : MonoBehaviour
     }
     void CheckPlaying()
     {
-        Debug.Log(CurrentParticle.GetComponent<ParticleSystem>().time);
+        
         if (CurrentParticle.GetComponent<ParticleSystem>().time >= CurrentParticle.GetComponent<ParticleSystem>().main.duration)
         {
-            //Debug.Log("Here");
             CurrentParticle.GetComponent<ParticleSystem>().Stop();
             CurrentParticle.GetComponent<AudioSource>().Stop();
             CurrentParticle.SetActive(false);
