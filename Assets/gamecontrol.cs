@@ -14,7 +14,9 @@ public class gamecontrol : MonoBehaviour
 
     private float randGoal;
     private int score_num=0;
-    float[] factors = new float[] {10f, 100f, 1000f, 10000f, 100000f, 1000000f,10000000f,100000000f, 1f, 0.1f, 0.01f};
+    float[] factors = new float[] { 1f, 10f, 100f, 1000f, 10000f, 100000f, 1000000f,10000000f,100000000f,1000000000f, 0.1f, 0.01f};
+
+    bool help=false;
 
     //timer -> reset timer to initialize
     private float timer_val;
@@ -92,9 +94,26 @@ public class gamecontrol : MonoBehaviour
 
     void reset_timer()
     {
-        timer_val=60; //1 minute
+        timer_val= 60; //1 minute
         canCount=true;
         doOnce=false;
+    }
+
+    public void showhelp ()
+    {
+        GameObject instPanel = GameObject.FindGameObjectWithTag("help");
+
+        if (! help)
+        {
+           help=true;
+           instPanel.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else if (help)
+        {
+            help=false;
+            instPanel.transform.GetChild(0).gameObject.SetActive(false);
+            reset_timer();
+        }
     }
 
 }
