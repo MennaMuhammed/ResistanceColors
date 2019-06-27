@@ -20,13 +20,17 @@ public class gamecontrol : MonoBehaviour
 
     //timer -> reset timer to initialize
     private float timer_val;
+    private float savetimerval;
     private bool canCount;
     private bool doOnce;
+
+     AudioSource match;
 
     // Start is called before the first frame update
     void Start()
     {
         updategoal();
+        match=GetComponent<AudioSource>();
         //InvokeRepeating("updategoal",15,15);
         InvokeRepeating("checkScore",1f,0.5f);
         
@@ -35,7 +39,13 @@ public class gamecontrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        value.text= resistance.value.ToString("N");
+        if(score_num<10){
+            value.text= resistance.value.ToString("N");
+        }
+        else{
+            value.enabled=false;
+        }
+        
         countDown();
         //checkScore(); 
     }
@@ -60,6 +70,7 @@ public class gamecontrol : MonoBehaviour
             else score_num++; // add 1 point in the remaining seconds
 
             // edit score
+            match.Play();
             score.text= score_num.ToString();
             updategoal();
             resistance.Restart();
@@ -107,12 +118,14 @@ public class gamecontrol : MonoBehaviour
         {
            help=true;
            instPanel.transform.GetChild(0).gameObject.SetActive(true);
+           savetimerval = timer_val;
         }
         else if (help)
         {
             help=false;
+            timer_val = savetimerval;
             instPanel.transform.GetChild(0).gameObject.SetActive(false);
-            reset_timer();
+            //reset_timer();
         }
     }
 
