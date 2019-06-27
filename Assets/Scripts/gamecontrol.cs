@@ -9,6 +9,7 @@ public class gamecontrol : MonoBehaviour
     public TextMeshProUGUI value;
     public TextMeshProUGUI goal;
     public TextMeshProUGUI score;
+    public TextMeshProUGUI finalScore;
     public TextMeshProUGUI timer;
     public Resistance resistance;
 
@@ -18,22 +19,23 @@ public class gamecontrol : MonoBehaviour
 
     bool help=false;
 
-    //timer -> reset timer to initialize
+    //timer -> reset_timer to initialize
     private float timer_val;
     private float savetimerval;
     private bool canCount;
     private bool doOnce;
 
-     AudioSource match;
+    //Audio
+    AudioSource match;
+    private AudioSource[] allAudioSources;
 
     // Start is called before the first frame update
     void Start()
     {
-        updategoal();
         match=GetComponent<AudioSource>();
-        //InvokeRepeating("updategoal",15,15);
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        updategoal();
         InvokeRepeating("checkScore",1f,0.5f);
-        
     }
 
     // Update is called once per frame
@@ -46,17 +48,18 @@ public class gamecontrol : MonoBehaviour
             value.enabled=false;
         }
         
-        countDown();
-        //checkScore(); 
+        countDown(); 
     }
 
     void updategoal()
     {
 
         int r = UnityEngine.Random.Range(0, factors.Length);
-        randGoal = UnityEngine.Random.Range(1,20) * factors[r];
+        randGoal = UnityEngine.Random.Range(1,100) * factors[r];
         goal.text= randGoal.ToString("N");
         reset_timer();
+        resistance.Restart();
+        value.text="0";
         
     }
     
@@ -73,12 +76,9 @@ public class gamecontrol : MonoBehaviour
             match.Play();
             score.text= score_num.ToString();
             updategoal();
-            resistance.Restart();
-            value.text="0";
             
         }
     }
-
 
     void countDown()
     {
@@ -98,7 +98,7 @@ public class gamecontrol : MonoBehaviour
             doOnce=true;
             timer.text="00:00";
             timer_val=0;
-            Debug.Log("Game Over");
+            gameover();
         }
     }
 
@@ -125,8 +125,53 @@ public class gamecontrol : MonoBehaviour
             help=false;
             timer_val = savetimerval;
             instPanel.transform.GetChild(0).gameObject.SetActive(false);
-            //reset_timer();
         }
+    }
+
+    void gameover()
+    {
+        controlAudio(false);
+        GameObject overPanel = GameObject.FindGameObjectWithTag("gameover");
+        overPanel.transform.GetChild(0).gameObject.SetActive(true);
+        GameObject helpbutton = GameObject.FindGameObjectWithTag("helpbuttom");
+        helpbutton.transform.GetChild(0).gameObject.SetActive(false);
+        finalScore.text=score_num.ToString();
+    }
+
+    void controlAudio(bool play) 
+    {
+        if (play){
+            foreach( AudioSource audioS in allAudioSources) {
+                audioS.Play();
+            }
+        }
+        else if (!play){
+            foreach( AudioSource audioS in allAudioSources) {
+                audioS.Stop();
+            }
+        }
+    }
+
+    public void playagain ()
+    {
+        controlAudio(true);
+        GameObject overPanel = GameObject.FindGameObjectWithTag("gameover");
+        overPanel.transform.GetChild(0).gameObject.SetActive(false);
+        GameObject helpbutton = GameObject.FindGameObjectWithTag("helpbuttom");
+        helpbutton.transform.GetChild(0).gameObject.SetActive(true);
+        GameObject extPanel = GameObject.FindGameObjectWithTag("exitbutton");
+        extPanel.transform.GetChild(0).gameObject.SetActive(true);
+        updategoal();
+        score_num=0;
+        score.text= score_num.ToString();
+
+    }
+
+     public void exitgame ()
+    {
+        gameover();
+        GameObject extPanel = GameObject.FindGameObjectWithTag("exitbutton");
+        extPanel.transform.GetChild(0).gameObject.SetActive(false);
     }
 
 }

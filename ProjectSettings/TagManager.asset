@@ -6,6 +6,9 @@ TagManager:
   tags:
   - score
   - help
+  - gameover
+  - helpbuttom
+  - exitbutton
   layers:
   - Default
   - TransparentFX
