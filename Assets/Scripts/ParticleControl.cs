@@ -6,7 +6,7 @@ using UnityEngine;
 public class ParticleControl : MonoBehaviour
 {
     public GameObject[] Particles;
-
+    public float Zpos = 5;
     Vector3 SpawnPosition = new Vector3(0, 0, 5f);
     bool playing = false;
     GameObject CurrentParticle;
@@ -55,7 +55,7 @@ public class ParticleControl : MonoBehaviour
     }
     private Vector3 SpawnPoint()
     {
-        float x = 0, y = 0, z = 5;
+        float x = 0, y = 0, z = Zpos;
         Vector3 point = new Vector3(x, y, z);
         bool seen = false;
         while (!seen)
