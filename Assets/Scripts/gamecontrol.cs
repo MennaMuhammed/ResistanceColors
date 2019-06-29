@@ -82,7 +82,7 @@ public class gamecontrol : MonoBehaviour
 
     void countDown()
     {
-        if(timer_val >= 0.0f && canCount)
+        if(timer_val > 0.0f && canCount)
         {
             timer_val -= Time.deltaTime;
             int seconds = (int) (timer_val % 60);
@@ -92,20 +92,20 @@ public class gamecontrol : MonoBehaviour
             timer.text=timeformat;
         }
 
-        else if(timer_val<= 0.0f && ! doOnce)
+        else if(timer_val<= 0.0f && ! doOnce && ! help)
         {
             canCount=false;
             doOnce=true;
             timer.text="00:00";
             timer_val=0;
-            gameover();
+            exitgame ();
         }
     }
 
 
     void reset_timer()
     {
-        timer_val= 60; //1 minute
+        timer_val= 5; //1 minute
         canCount=true;
         doOnce=false;
     }
