@@ -6,8 +6,8 @@ public class BandColor : MonoBehaviour
 {
     static Color brown = new Color(102f / 255f, 51f / 255f, 0f / 255f);
     static Color orange = new Color(255f / 255f, 116f / 255f, 0f / 255f);
-    static Color violet = new Color(204f / 255f, 51f / 255f, 255f / 255f);
-    static Color gold = new Color(229f / 255f, 193f / 255f, 0f / 255f);
+    static Color violet = new Color(213f / 255f, 120f / 255f, 243f / 255f);
+    static Color gold = new Color(226f / 255f, 196f / 255f, 89f / 255f);
     static Color silver = new Color(198f / 255f, 198f / 255f, 198f / 255f);
     
     public Color [] BandColors = { Color.black, brown, Color.red, orange, Color.yellow, Color.green,Color.blue,violet,Color.grey,Color.white,gold,silver};
