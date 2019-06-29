@@ -105,7 +105,7 @@ public class gamecontrol : MonoBehaviour
 
     void reset_timer()
     {
-        timer_val= 5; //1 minute
+        timer_val= 60; //1 minute
         canCount=true;
         doOnce=false;
     }
