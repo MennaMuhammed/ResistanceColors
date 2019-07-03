@@ -24,7 +24,6 @@ public class gamecontrol : MonoBehaviour
     private float savetimerval;
     private bool canCount;
     private bool doOnce;
-
     //Audio
     AudioSource match;
     private AudioSource[] allAudioSources;
